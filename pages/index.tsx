@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Beer, LogIn, LogOut, Search, Plus, X, Sparkles, Moon, Sun, Wine, Check } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { supabase } from '../lib/supabase';
+import Link from 'next/link';
+import { supabase } from '../lib/supabase/client';
 import { Auth } from '../components/Auth';
 import { getAdvancedRecommendations, getAllIngredients, getLibraryStats, getCuratedClassics, searchByIngredients } from '../lib/cocktail-service';
 import { CATEGORY_MAP, getIngredientCategory, POPULAR_INGREDIENTS } from '../lib/ingredient-categories';
@@ -183,9 +184,9 @@ export default function Home() {
         <div>
           {session ? (
             <div className="flex items-center gap-6">
-              <a href="/studio" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Studio</a>
-              <a href="/lounge" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking_widest">Lounge</a>
-              <a href="/profile" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Profile</a>
+              <Link href="/studio" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Studio</Link>
+              <Link href="/lounge" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Lounge</Link>
+              <Link href="/profile" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Profile</Link>
               
               <button 
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -200,7 +201,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="flex items-center gap-6">
-              <a href="/lounge" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Lounge</a>
+              <Link href="/lounge" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold uppercase tracking-widest">Lounge</Link>
               
               <button 
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -315,7 +316,7 @@ export default function Home() {
                       className="w-full text-left px-4 py-3 text-xs hover:bg-muted transition-colors flex items-center gap-3 border-b border-border last:border-0 group"
                     >
                       <div className="w-8 h-8 rounded-full bg-muted overflow-hidden flex-shrink-0">
-                        <img src={drink.image} className="w-full h-full object-cover" />
+                        <img src={drink.image} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div className="flex-1">
                         <p className="font-bold">{drink.name}</p>
@@ -573,7 +574,7 @@ function renderDrinkCard(drink: any) {
   return (
     <a href={`/drink/${drink.id}`} key={drink.id} className="group cursor-pointer">
       <div className="relative overflow-hidden rounded-3xl aspect-[4/5] bg-card border border-border shadow-sm group-hover:shadow-2xl group-hover:shadow-primary/10 transition-all duration-500">
-        <img src={drink.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700" />
+        <img src={drink.image} alt={drink.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-105 transition-all duration-700" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
         <div className="absolute bottom-0 w-full p-6">
           <h3 className="text-xl font-serif text-white group-hover:text-primary transition-colors">{drink.name}</h3>

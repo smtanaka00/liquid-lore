@@ -5,7 +5,7 @@ import { ChevronLeft, Play, Heart, BookmarkPlus, Share2, Sparkles, QrCode, Star,
 import { useTheme } from 'next-themes';
 import { QRShare } from '../../components/QRShare';
 import { GlassIcon } from '../../components/GlassIcon';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabase/client';
 
 export default function DrinkDetail() {
   const router = useRouter();
@@ -179,7 +179,7 @@ export default function DrinkDetail() {
   return (
     <div className="min-h-screen bg-background text-foreground pb-20 transition-colors duration-300">
       <div className="relative h-[50vh]">
-        <img src={drink.image} className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000" />
+        <img src={drink.image} alt={drink.name} className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         <button onClick={() => router.back()} className="absolute top-8 left-8 p-3 bg-card border border-border rounded-full hover:text-primary transition-colors transition-all active:scale-95 shadow-xl"><ChevronLeft /></button>
         
@@ -220,7 +220,7 @@ export default function DrinkDetail() {
             </button>
           </div>
         </div>
-        <p className="text-2xl text-muted-foreground italic font-serif leading-relaxed mb-16 max-w-2xl border-l-4 border-primary/20 pl-8 transition-all hover:border-primary duration-1000">"{drink.story}"</p>
+        <p className="text-2xl text-muted-foreground italic font-serif leading-relaxed mb-16 max-w-2xl border-l-4 border-primary/20 pl-8 transition-all hover:border-primary duration-1000">&ldquo;{drink.story}&rdquo;</p>
 
         <div className="grid md:grid-cols-[1fr_2fr] gap-16 border-t border-border pt-16">
           <div>
@@ -312,7 +312,7 @@ export default function DrinkDetail() {
                             </div>
                             <span className="text-muted-foreground text-[9px] uppercase font-bold tracking-widest">{new Date(note.created_at).toLocaleDateString()}</span>
                         </div>
-                        <p className="text-foreground text-sm mb-6 leading-relaxed italic">"{displayNote || "No summary provided."}"</p>
+                        <p className="text-foreground text-sm mb-6 leading-relaxed italic">&ldquo;{displayNote || 'No summary provided.'}&rdquo;</p>
                         {displayTwists && (
                             <div className="flex items-start gap-3 text-primary/80 bg-primary/5 p-4 rounded-2xl border border-primary/10 transition-all group-hover:border-primary/30">
                                 <Sparkles size={16} className="mt-0.5 flex-shrink-0" />
