@@ -1,0 +1,1135 @@
+[
+ {
+  "name": "Old Fashioned",
+  "category": "Cocktail",
+  "glass": "rocks",
+  "method": "stir",
+  "ice": "large cube",
+  "garnish": "expressed orange peel, cocktail cherry",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "boozy",
+   "warming",
+   "sweet",
+   "bitter"
+  ],
+  "vibes": [
+   "Date Night",
+   "Cozy Night In",
+   "After Dinner"
+  ],
+  "lore": "The Old Fashioned is arguably the original cocktail — the word 'cocktail' was first defined in 1806 as a spirit, sugar, water, and bitters. When bartenders in the late 1800s began adding elaborate liqueurs, a segment of drinkers asked for their drinks made 'the old-fashioned way.' The name stuck.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use a barspoon and stir for a full 30 seconds. Under-stirring is the most common mistake with this drink — proper dilution and temperature are everything.",
+  "steps": [
+   "Combine all ingredients in a mixing glass.",
+   "Fill with large ice cubes and stir steadily for 30 seconds.",
+   "Strain into your chilled glass.",
+   "Garnish with expressed orange peel, cocktail cherry."
+  ],
+  "ingredients": [
+   {
+    "name": "bourbon",
+    "amount": "2 oz",
+    "notes": "Buffalo Trace or Woodford Reserve recommended"
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¼ oz",
+    "notes": null
+   },
+   {
+    "name": "Angostura bitters",
+    "amount": "2 dashes",
+    "notes": null
+   },
+   {
+    "name": "orange bitters",
+    "amount": "1 dash",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Negroni",
+  "category": "Cocktail",
+  "glass": "rocks",
+  "method": "stir",
+  "ice": "large cube",
+  "garnish": "orange twist",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "bitter",
+   "sweet",
+   "herby",
+   "boozy"
+  ],
+  "vibes": [
+   "Date Night",
+   "After Dinner",
+   "Happy Hour"
+  ],
+  "lore": "Count Camillo Negroni walked into Café Casoni in Florence, Italy, in 1919 and asked bartender Fosco Scarselli to strengthen his Americano by replacing the soda water with gin. The bartender obliged and garnished it with an orange peel instead of lemon to distinguish it from the original. A cocktail dynasty was born.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "The equal-parts ratio is intentional. Resist the urge to add more gin — the tension between spirit, bitter, and sweet is the whole point.",
+  "steps": [
+   "Combine all ingredients in a mixing glass.",
+   "Fill with large ice cubes and stir steadily for 30 seconds.",
+   "Strain into your chilled glass.",
+   "Garnish with orange twist."
+  ],
+  "ingredients": [
+   {
+    "name": "gin",
+    "amount": "1 oz",
+    "notes": null
+   },
+   {
+    "name": "Campari",
+    "amount": "1 oz",
+    "notes": null
+   },
+   {
+    "name": "sweet vermouth",
+    "amount": "1 oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Margarita",
+  "category": "Cocktail",
+  "glass": "margarita glass",
+  "method": "shake",
+  "ice": "on the rocks",
+  "garnish": "half salt rim, lime wheel",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "sour",
+   "citrusy",
+   "sweet",
+   "refreshing"
+  ],
+  "vibes": [
+   "Party Starter",
+   "Summer Patio",
+   "Happy Hour",
+   "Brunch"
+  ],
+  "lore": "The Margarita's true origin is contested — at least a dozen people claim to have invented it between the 1930s and 1950s. The most cited story involves socialite Margarita Sames, who mixed the drink for guests at her Acapulco villa in 1948. Whether true or not, by the 1970s it had become the best-selling cocktail in the United States.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Tommy's variation (swap Cointreau for ½ oz agave syrup) is often considered the superior recipe — it lets the tequila shine and is less sweet.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with half salt rim, lime wheel."
+  ],
+  "ingredients": [
+   {
+    "name": "blanco tequila",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "Cointreau",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/5noda61589575158/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Daiquiri",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "lime wheel on rim",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "sour",
+   "citrusy",
+   "refreshing",
+   "sweet"
+  ],
+  "vibes": [
+   "Summer Patio",
+   "Date Night",
+   "Happy Hour"
+  ],
+  "lore": "Named after a beach near Santiago, Cuba, the Daiquiri was supposedly created by American mining engineer Jennings Cox in 1898 when he ran out of gin and improvised with local rum. Ernest Hemingway later immortalized it by drinking them by the dozen at Havana's El Floridita — frozen and with extra lime.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "The classic ratio is 2:¾:¾ but the best Daiquiri is one calibrated to your specific rum and limes. Taste and adjust before you shake.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with lime wheel on rim."
+  ],
+  "ingredients": [
+   {
+    "name": "white rum",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Mojito",
+  "category": "Cocktail",
+  "glass": "highball",
+  "method": "build",
+  "ice": "crushed",
+  "garnish": "slapped mint sprig, lime wheel",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "herby",
+   "citrusy",
+   "refreshing",
+   "sweet"
+  ],
+  "vibes": [
+   "Summer Patio",
+   "Beach Day",
+   "Party Starter",
+   "Brunch"
+  ],
+  "lore": "The Mojito's roots trace back to 16th-century Cuba, where a similar drink called 'El Draque' was made with aguardiente (a precursor to rum), lime, sugar, and mint. When the sugar cane industry introduced proper rum, the recipe evolved into what we know today. It became internationally famous as Hemingway's drink of choice at La Bodeguita del Medio in Havana.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Gently press (don't shred) the mint with the syrup and lime juice. Over-muddling tears the leaves and releases bitter chlorophyll instead of fragrant oils.",
+  "steps": [
+   "Fill your glass with ice.",
+   "Add ingredients in order, finishing with any carbonated components.",
+   "Give a single gentle stir to incorporate.",
+   "Garnish with slapped mint sprig, lime wheel."
+  ],
+  "ingredients": [
+   {
+    "name": "white rum",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "1 oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh mint leaves",
+    "amount": "10-12 leaves",
+    "notes": null
+   },
+   {
+    "name": "club soda",
+    "amount": "2 oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/metwgh1606770327/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Manhattan",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "stir",
+  "ice": "none (served up)",
+  "garnish": "Luxardo cherry, expressed orange peel",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "boozy",
+   "warming",
+   "sweet",
+   "bitter"
+  ],
+  "vibes": [
+   "Date Night",
+   "After Dinner",
+   "Cozy Night In"
+  ],
+  "lore": "Legend holds that the Manhattan was invented at New York's Manhattan Club in 1874 at a banquet hosted by Lady Randolph Churchill (Winston's mother) for presidential candidate Samuel Tilden. Historians now doubt this story — Lady Churchill was pregnant and in England at the time — but the drink itself is undeniably New York in its DNA.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use Carpano Antica Formula for a richer, more complex Manhattan. And never, ever shake it — a Manhattan should be silky, not frothy.",
+  "steps": [
+   "Combine all ingredients in a mixing glass.",
+   "Fill with large ice cubes and stir steadily for 30 seconds.",
+   "Strain into your chilled glass.",
+   "Garnish with Luxardo cherry, expressed orange peel."
+  ],
+  "ingredients": [
+   {
+    "name": "rye whiskey",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "sweet vermouth",
+    "amount": "1 oz",
+    "notes": null
+   },
+   {
+    "name": "Angostura bitters",
+    "amount": "2 dashes",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/e8mjxc1504820364.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/e8mjxc1504820364/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Whiskey Sour",
+  "category": "Cocktail",
+  "glass": "rocks",
+  "method": "shake",
+  "ice": "on the rocks",
+  "garnish": "lemon wheel, Angostura bitters pattern on foam",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "sour",
+   "citrusy",
+   "sweet",
+   "warming"
+  ],
+  "vibes": [
+   "Happy Hour",
+   "Date Night",
+   "Party Starter"
+  ],
+  "lore": "The sour formula — spirit, citrus, sweetener — is one of the oldest templates in cocktail history, documented as far back as 1862 in Jerry Thomas's Bartender's Guide. The Whiskey Sour became a staple of American bars during Prohibition, when it helped mask the harsh flavor of poorly made bootleg whiskey.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Always dry shake first (no ice) for a full 15 seconds if using egg white, then shake again with ice. This creates the thick, stable foam that defines a proper Whiskey Sour.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Dry shake (without ice) for 15 seconds first to emulsify the egg white.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with lemon wheel, Angostura bitters pattern on foam."
+  ],
+  "ingredients": [
+   {
+    "name": "bourbon",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lemon juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "egg white",
+    "amount": "1 (optional)",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Aperol Spritz",
+  "category": "Cocktail",
+  "glass": "wine glass",
+  "method": "build",
+  "ice": "large cubes",
+  "garnish": "orange half-wheel, olive (optional)",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "bitter",
+   "sweet",
+   "refreshing",
+   "fruity"
+  ],
+  "vibes": [
+   "Brunch",
+   "Summer Patio",
+   "Happy Hour",
+   "Party Starter"
+  ],
+  "lore": "The Aperol Spritz has roots in 19th-century Venetia, when Austrian soldiers stationed in Northern Italy found local wines too strong and began adding water — hence 'spritz' from the German 'spritzen.' Aperol itself wasn't created until 1919, and the modern spritz only went national when Campari Group launched a massive marketing campaign in the 2000s.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use very cold Prosecco and very cold Aperol. Pour Prosecco first, then Aperol, then soda — this minimizes the need to stir and preserves bubbles.",
+  "steps": [
+   "Fill your glass with ice.",
+   "Add ingredients in order, finishing with any carbonated components.",
+   "Give a single gentle stir to incorporate.",
+   "Garnish with orange half-wheel, olive (optional)."
+  ],
+  "ingredients": [
+   {
+    "name": "Aperol",
+    "amount": "3 oz",
+    "notes": null
+   },
+   {
+    "name": "Prosecco",
+    "amount": "3 oz",
+    "notes": null
+   },
+   {
+    "name": "splash of club soda",
+    "amount": "1 oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/iaspp31606771708.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/iaspp31606771708/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Paloma",
+  "category": "Cocktail",
+  "glass": "highball",
+  "method": "build",
+  "ice": "on the rocks",
+  "garnish": "grapefruit wedge, salted rim",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "citrusy",
+   "refreshing",
+   "sweet",
+   "sour"
+  ],
+  "vibes": [
+   "Summer Patio",
+   "Beach Day",
+   "Brunch",
+   "Happy Hour"
+  ],
+  "lore": "The Paloma is Mexico's most popular tequila cocktail — more popular than the Margarita within Mexico itself. 'Paloma' means dove in Spanish, though the exact origin of the name is unclear. It's thought to have been created in the 1950s or 60s, possibly by Don Javier Delgado Corona at his bar La Capilla in Tequila, Mexico — who also invented the Batanga.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Fresh grapefruit juice (2 oz) plus a splash of soda is better than grapefruit soda alone — more depth, less sweetness, and you control the balance.",
+  "steps": [
+   "Fill your glass with ice.",
+   "Add ingredients in order, finishing with any carbonated components.",
+   "Give a single gentle stir to incorporate.",
+   "Garnish with grapefruit wedge, salted rim."
+  ],
+  "ingredients": [
+   {
+    "name": "blanco tequila",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "½ oz",
+    "notes": null
+   },
+   {
+    "name": "pinch of salt",
+    "amount": "1 pinch",
+    "notes": null
+   },
+   {
+    "name": "grapefruit soda (Jarritos or Fever-Tree)",
+    "amount": "4 oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/tsovh21604330322.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/tsovh21604330322/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Moscow Mule",
+  "category": "Cocktail",
+  "glass": "copper mug",
+  "method": "build",
+  "ice": "crushed",
+  "garnish": "lime wheel, candied ginger",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "spicy",
+   "citrusy",
+   "refreshing",
+   "sweet"
+  ],
+  "vibes": [
+   "Party Starter",
+   "Summer Patio",
+   "Happy Hour",
+   "Game Night"
+  ],
+  "lore": "The Moscow Mule was born out of a marketing stunt in 1941. John Martin had just bought the rights to Smirnoff vodka (nearly unknown in the US at the time) and met Jack Morgan, who owned Cock 'n' Bull ginger beer and had a warehouse of copper mugs he couldn't sell. They combined forces and created the Moscow Mule as a promotional vehicle for all three products. It worked.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "The copper mug isn't just theatrical — it keeps the ice colder longer and subtly changes the metal-ion flavor profile. Use a quality spicy ginger beer, not ginger ale.",
+  "steps": [
+   "Fill your glass with ice.",
+   "Add ingredients in order, finishing with any carbonated components.",
+   "Give a single gentle stir to incorporate.",
+   "Garnish with lime wheel, candied ginger."
+  ],
+  "ingredients": [
+   {
+    "name": "vodka",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "½ oz",
+    "notes": null
+   },
+   {
+    "name": "ginger beer",
+    "amount": "4 oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/3pylqc1504370988.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/3pylqc1504370988/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Dark 'n' Stormy",
+  "category": "Cocktail",
+  "glass": "highball",
+  "method": "build",
+  "ice": "on the rocks",
+  "garnish": "lime wedge, candied ginger",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "spicy",
+   "warming",
+   "sweet",
+   "refreshing"
+  ],
+  "vibes": [
+   "Happy Hour",
+   "Summer Patio",
+   "Game Night"
+  ],
+  "lore": "The Dark 'n' Stormy is one of the few trademarked cocktails in existence — Gosling's Brothers of Bermuda owns the name and stipulates that Gosling's Black Seal rum must be used. The drink became the national drink of Bermuda, where local sailors drank it after long ocean crossings, the dark rum floating dramatically on pale ginger beer like storm clouds over the sea.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Float the rum on top of the ginger beer rather than mixing it in — this creates the signature storm cloud effect and a more complex sip.",
+  "steps": [
+   "Fill your glass with ice.",
+   "Add ingredients in order, finishing with any carbonated components.",
+   "Give a single gentle stir to incorporate.",
+   "Garnish with lime wedge, candied ginger."
+  ],
+  "ingredients": [
+   {
+    "name": "Gosling's Black Seal rum",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "ginger beer",
+    "amount": "4 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "½ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/oe8rg51593904269.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/oe8rg51593904269/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Cosmopolitan",
+  "category": "Cocktail",
+  "glass": "martini",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "flamed orange peel",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "citrusy",
+   "sweet",
+   "fruity",
+   "refreshing"
+  ],
+  "vibes": [
+   "Date Night",
+   "Party Starter",
+   "Happy Hour"
+  ],
+  "lore": "The Cosmopolitan was popularized by Sex and the City in the late 1990s, but its true origin is debated. Bartender Cheryl Cook claims to have invented it in Miami in 1985, while Toby Cecchini takes credit for the version served at the Odeon in New York in 1988. Either way, it became the defining cocktail of the 1990s — and is due for a serious re-evaluation.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use just enough cranberry juice to turn the drink pink. Too much and you lose the citrus brightness. The cranberry is for color and a hint of tartness, not to dominate.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with flamed orange peel."
+  ],
+  "ingredients": [
+   {
+    "name": "citrus vodka",
+    "amount": "1½ oz",
+    "notes": null
+   },
+   {
+    "name": "Cointreau",
+    "amount": "½ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "cranberry juice",
+    "amount": "¼ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/kpsajh1504368362.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/kpsajh1504368362/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Gimlet",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "lime wheel",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "citrusy",
+   "refreshing",
+   "sour",
+   "herby"
+  ],
+  "vibes": [
+   "Date Night",
+   "Happy Hour",
+   "Summer Patio"
+  ],
+  "lore": "The Gimlet appears in Raymond Chandler's novel 'The Long Goodbye' (1953), where Philip Marlowe declares: 'A real gimlet is half gin and half Rose's lime juice and nothing else.' The original used Rose's preserved lime cordial, but the modern craft version uses fresh lime and syrup — cleaner, brighter, and more vibrant.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "If you want to honor the original, try a split: half fresh lime, half Rose's lime cordial. You get the nostalgia and the brightness.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with lime wheel."
+  ],
+  "ingredients": [
+   {
+    "name": "gin",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/9ajnje1504699234.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/9ajnje1504699234/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Espresso Martini",
+  "category": "Cocktail",
+  "glass": "martini",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "three coffee beans",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "sweet",
+   "bitter",
+   "boozy",
+   "creamy"
+  ],
+  "vibes": [
+   "After Dinner",
+   "Date Night",
+   "Late Night",
+   "Party Starter"
+  ],
+  "lore": "The Espresso Martini was invented by Dick Bradsell at the Soho Brasserie in London in 1983. According to legend, a model (widely rumored to be Kate Moss) asked for something to 'wake me up and then f*** me up.' Bradsell grabbed the espresso machine that happened to be next to his bar station and created an impromptu coffee cocktail that conquered the world.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Shake extremely hard with plenty of ice for at least 15 seconds. The three-foam-bubble crown only appears when the shake is vigorous enough to properly aerate.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with three coffee beans."
+  ],
+  "ingredients": [
+   {
+    "name": "vodka",
+    "amount": "1½ oz",
+    "notes": null
+   },
+   {
+    "name": "Kahlua",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh espresso",
+    "amount": "1 oz (cooled)",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¼ oz (optional)",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/n0sx631504372951.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/n0sx631504372951/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Jungle Bird",
+  "category": "Cocktail",
+  "glass": "tiki mug",
+  "method": "shake",
+  "ice": "crushed",
+  "garnish": "pineapple wedge, Luxardo cherry, mint sprig",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "tropical",
+   "bitter",
+   "sweet",
+   "fruity"
+  ],
+  "vibes": [
+   "Party Starter",
+   "Summer Patio",
+   "Beach Day",
+   "Happy Hour"
+  ],
+  "lore": "The Jungle Bird was created in 1978 at the Aviary Bar in the Kuala Lumpur Hilton — a rare tiki cocktail from Southeast Asia rather than the American tiki bar tradition. It was the hotel's welcome cocktail. After disappearing for decades, it was rediscovered by Jeff 'Beachbum' Berry in 2004 and has since become a modern classic.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use Campari without hesitation — it sounds wrong in a fruity tropical drink, but the bitter counterpoint is exactly what keeps the pineapple from becoming cloying.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with pineapple wedge, Luxardo cherry, mint sprig."
+  ],
+  "ingredients": [
+   {
+    "name": "dark rum",
+    "amount": "1½ oz",
+    "notes": null
+   },
+   {
+    "name": "Campari",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "pineapple juice",
+    "amount": "1½ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "½ oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "½ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/vr5n951554082409.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/vr5n951554082409/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Tommy's Margarita",
+  "category": "Cocktail",
+  "glass": "rocks",
+  "method": "shake",
+  "ice": "on the rocks",
+  "garnish": "lime wheel, optional salt rim",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "citrusy",
+   "sour",
+   "refreshing",
+   "sweet"
+  ],
+  "vibes": [
+   "Happy Hour",
+   "Summer Patio",
+   "Date Night"
+  ],
+  "lore": "Invented by Julio Bermejo at Tommy's Mexican Restaurant in San Francisco in the 1990s, this stripped-down Margarita replaces the orange liqueur with agave syrup, letting the tequila take center stage. The IBA added it to their 'New Era Drinks' list in 2011, cementing its status as a modern classic.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Use a quality 100% agave tequila — there's nowhere to hide in this recipe. The cleaner the tequila, the better the drink.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with lime wheel, optional salt rim."
+  ],
+  "ingredients": [
+   {
+    "name": "blanco tequila",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "1 oz",
+    "notes": null
+   },
+   {
+    "name": "agave syrup",
+    "amount": "½ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/loefgt1504373502.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/loefgt1504373502/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Paper Plane",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "no garnish",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "bitter",
+   "citrusy",
+   "sweet",
+   "herby"
+  ],
+  "vibes": [
+   "Date Night",
+   "After Dinner",
+   "Happy Hour"
+  ],
+  "lore": "Created by Sam Ross at Milk & Honey in New York in 2007, the Paper Plane is a modern equal-parts cocktail that became an instant classic. Named after the M.I.A. song that was playing when Ross was developing the recipe, it demonstrated that a genuinely new template — not just a riff on an old one — could still be invented.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "The equal-parts format is non-negotiable. Every element is load-bearing. Substituting any ingredient collapses the balance.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with no garnish."
+  ],
+  "ingredients": [
+   {
+    "name": "bourbon",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "Aperol",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "Amaro Nonino",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lemon juice",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/2p0bo91604329220.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/2p0bo91604329220/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Last Word",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "Luxardo cherry",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "herby",
+   "citrusy",
+   "sweet",
+   "complex"
+  ],
+  "vibes": [
+   "Date Night",
+   "After Dinner",
+   "Cozy Night In"
+  ],
+  "lore": "The Last Word originated at the Detroit Athletic Club around 1916 and was documented in Ted Saucier's 1951 book 'Bottoms Up.' It then vanished for decades until Murray Stenson of Zig Zag Café in Seattle revived it in 2004, sparking the cocktail revival's love affair with equal-parts drinks and forgotten pre-Prohibition recipes.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Chartreuse Green is irreplaceable — there's nothing else with that particular herbal complexity. Don't substitute Yellow Chartreuse; it's a different drink.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with Luxardo cherry."
+  ],
+  "ingredients": [
+   {
+    "name": "gin",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "Chartreuse Green",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "Maraschino liqueur",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lime juice",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/rms5601504372070.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/rms5601504372070/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Sazerac",
+  "category": "Cocktail",
+  "glass": "rocks",
+  "method": "stir",
+  "ice": "none (served neat)",
+  "garnish": "expressed lemon peel (discarded), no garnish in glass",
+  "difficulty": "medium",
+  "flavor_profiles": [
+   "boozy",
+   "warming",
+   "bitter",
+   "complex"
+  ],
+  "vibes": [
+   "Date Night",
+   "After Dinner",
+   "Cozy Night In"
+  ],
+  "lore": "The Sazerac is one of the oldest known American cocktails, originating in New Orleans in the 1830s at the Sazerac Coffee House. Originally made with Cognac, a phylloxera epidemic that devastated French vineyards forced a switch to rye whiskey. In 2008, the Louisiana State Legislature officially recognized it as New Orleans' official cocktail.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Chill the serving glass with ice water, discard the water, rinse with absinthe, then discard the absinthe — just the residue remains. This aromatic ghost is central to the drink.",
+  "steps": [
+   "Combine all ingredients in a mixing glass.",
+   "Fill with large ice cubes and stir steadily for 30 seconds.",
+   "Strain into your chilled glass.",
+   "Garnish with expressed lemon peel (discarded), no garnish in glass."
+  ],
+  "ingredients": [
+   {
+    "name": "rye whiskey",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "simple syrup",
+    "amount": "¼ oz",
+    "notes": null
+   },
+   {
+    "name": "Peychaud's bitters",
+    "amount": "3 dashes",
+    "notes": null
+   },
+   {
+    "name": "Angostura bitters",
+    "amount": "1 dash",
+    "notes": null
+   },
+   {
+    "name": "absinthe (for rinse)",
+    "amount": "¼ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/vvxywv1472719417.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/vvxywv1472719417/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ },
+ {
+  "name": "Bee's Knees",
+  "category": "Cocktail",
+  "glass": "coupe",
+  "method": "shake",
+  "ice": "none (served up)",
+  "garnish": "lemon twist",
+  "difficulty": "easy",
+  "flavor_profiles": [
+   "floral",
+   "citrusy",
+   "sweet",
+   "refreshing"
+  ],
+  "vibes": [
+   "Date Night",
+   "Summer Patio",
+   "Brunch"
+  ],
+  "lore": "The Bee's Knees emerged during Prohibition as a way to mask the rough flavor of bathtub gin — honey and lemon were cheap, accessible, and effective. 'Bee's knees' was slang for 'the best' in 1920s America. The drink was served at speakeasies across the country and has since become a cornerstone of the gin sour family.",
+  "lore_source": "Liquid Lore editorial",
+  "pro_tip": "Make honey syrup fresh: combine equal parts honey and warm water and stir until dissolved. Pre-made keeps in the fridge for two weeks.",
+  "steps": [
+   "Combine all ingredients in a cocktail shaker.",
+   "Fill with ice and shake vigorously for 12–15 seconds until well-chilled.",
+   "Strain into your prepared glass.",
+   "Garnish with lemon twist."
+  ],
+  "ingredients": [
+   {
+    "name": "gin",
+    "amount": "2 oz",
+    "notes": null
+   },
+   {
+    "name": "fresh lemon juice",
+    "amount": "¾ oz",
+    "notes": null
+   },
+   {
+    "name": "honey syrup (1:1)",
+    "amount": "¾ oz",
+    "notes": null
+   }
+  ],
+  "photo": {
+   "url": "https://www.thecocktaildb.com/images/media/drink/0ue7301619519546.jpg",
+   "thumb": "https://www.thecocktaildb.com/images/media/drink/0ue7301619519546/preview.jpg",
+   "source": "thecocktaildb",
+   "credit": "TheCocktailDB",
+   "credit_url": "https://www.thecocktaildb.com"
+  }
+ }
+]
