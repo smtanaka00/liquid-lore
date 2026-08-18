@@ -1,0 +1,24 @@
+{
+  "name": "Liquid Lore: Premium Mixology",
+  "short_name": "Liquid Lore",
+  "description": "The premium speakeasy guide and storytelling platform for cocktail enthusiasts.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090b",
+  "theme_color": "#f59e0b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["lifestyle", "food"]
+}
