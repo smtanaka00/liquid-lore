@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    // Set explicitly: without it tsc defaults to ES3, which rejects iterating a Set or Map
+    // — the natural way to express the taxonomy's graph walks and the library's dedup passes.
+    "target": "es2020",
     "lib": [
       "dom",
       "dom.iterable",

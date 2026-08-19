@@ -1,0 +1,13 @@
+{
+  "total": 629,
+  "classics": 79,
+  "withLore": 20,
+  "withPhoto": 629,
+  "distinctPhotos": 629,
+  "unresolvedIngredients": {
+    "Kool-Aid": 4,
+    "Fruit": 3,
+    "Jello": 1,
+    "Maui": 1
+  }
+}

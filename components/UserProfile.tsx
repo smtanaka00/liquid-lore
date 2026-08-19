@@ -14,7 +14,7 @@ import { supabase } from '../lib/supabase/client';
 import { ArrowLeft, User, Heart, PenTool, Sparkles, ShieldCheck, Trophy, Medal, Wine, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { getCocktailDetail } from '../lib/cocktail-service';
+import { fetchCocktail } from '../lib/api-client';
 
 export const UserProfile = ({ profileId }: { profileId?: string }) => {
     const router = useRouter();
@@ -61,10 +61,17 @@ export const UserProfile = ({ profileId }: { profileId?: string }) => {
             .order('created_at', { ascending: false });
         if (recipes) setMyRecipes(recipes);
 
-        const { data: favs } = await supabase.from('favorites').select('drink_id').eq('user_id', userId);
+        // Favourites hold both library ids and custom-recipe uuids; `kind` tells them
+        // apart so a community recipe isn't looked up in the curated library and dropped.
+        const { data: favs } = await supabase
+            .from('favorites')
+            .select('drink_id, kind')
+            .eq('user_id', userId);
+
         if (favs && favs.length > 0) {
-            const detailedFavs = await Promise.all(favs.map(f => getCocktailDetail(f.drink_id)));
-            setFavorites(detailedFavs.filter(Boolean));
+            const libraryFavs = favs.filter(f => f.kind !== 'custom');
+            const detailed = await Promise.all(libraryFavs.map(f => fetchCocktail(f.drink_id)));
+            setFavorites(detailed.filter(Boolean));
         }
         setLoading(false);
     };
@@ -266,10 +273,10 @@ export const UserProfile = ({ profileId }: { profileId?: string }) => {
                     ) : (
                         <div className="grid md:grid-cols-3 gap-8">
                             {favorites.map((drink: any) => (
-                                <Link href={`/drink/${drink.id}`} key={drink.id} className="group cursor-pointer">
+                                <Link href={`/drink/${drink.slug}`} key={drink.id} className="group cursor-pointer">
                                     <div className="relative overflow-hidden rounded-[2rem] aspect-[4/5] bg-card border border-border transition-transform hover:-translate-y-2 duration-500">
                                         <img
-                                            src={drink.image}
+                                            src={drink.photo?.thumb || drink.photo?.url || ''}
                                             alt={drink.name}
                                             loading="lazy"
                                             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-110"
@@ -277,7 +284,7 @@ export const UserProfile = ({ profileId }: { profileId?: string }) => {
                                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
                                         <div className="absolute bottom-0 w-full p-8">
                                             <h3 className="text-2xl font-serif text-white group-hover:text-primary transition-colors tracking-tight">{drink.name}</h3>
-                                            {drink.hasLore && (
+                                            {drink.lore && (
                                                 <span className="text-primary text-[9px] uppercase font-bold tracking-[0.3em] mt-2 block">✨ Premium Lore</span>
                                             )}
                                         </div>
