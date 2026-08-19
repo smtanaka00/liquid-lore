@@ -152,25 +152,59 @@ whether to surface it. No user-facing crash from a data outage.
 
 | # | Task | Files | Status |
 |---|------|-------|--------|
-| 1.1 | Canonical ingredient taxonomy: hierarchy, brand aliases, pantry set (B2) | `lib/domain/ingredient-taxonomy.ts` | ⬜ |
-| 1.2 | Domain types shared by every layer | `lib/domain/types.ts` | ⬜ |
-| 1.3 | `build-library.mjs` — TheCocktailDB → normalized seed, merged with premium lore (B3) | `scripts/build-library.mjs` | ⬜ |
-| 1.4 | Generate `data/cocktails.seed.json`; archive the 1,030 generated recipes out of the app | `data/`, `enrichments/` | ⬜ |
-| 1.5 | Repository with Supabase-primary / seed-fallback and non-throwing contract (B4) | `lib/data/*` | ⬜ |
-| 1.6 | API routes: cocktails, cocktail detail, ingredients, cabinet match | `pages/api/*` | ⬜ |
-| 1.7 | Delete the 2 MB client import; browser talks only to `/api` | `lib/cocktail-service.ts` → removed | ⬜ |
-| 1.8 | `db:seed` script + refreshed `cocktails` migration | `scripts/seed-supabase.mjs` | ⬜ |
+| 1.1 | Canonical ingredient taxonomy: hierarchy, brand aliases, pantry set (B2) | `lib/domain/ingredient-taxonomy.ts` | ✅ |
+| 1.2 | Domain types shared by every layer | `lib/domain/types.ts` | ✅ |
+| 1.3 | `build-library.ts` — TheCocktailDB → normalized seed, merged with premium lore (B3) | `scripts/build-library.ts` | ✅ |
+| 1.4 | Generate `data/cocktails.seed.json`; archive the 1,030 generated recipes out of the app | `data/`, `enrichments/_archive/` | ✅ |
+| 1.5 | Repository with Supabase-primary / seed-fallback and non-throwing contract (B4) | `lib/data/*` | ✅ |
+| 1.6 | API routes: cocktails, cocktail detail, ingredients, cabinet match | `pages/api/*` | ✅ |
+| 1.7 | Delete the 2 MB client import; browser talks only to `/api` | `lib/api-client.ts`; old files removed | ✅ |
+| 1.8 | `db:seed` script + refreshed `cocktails` migration | `scripts/seed-supabase.ts` | ✅ |
+| 1.9 | Cabinet persistence + migration of legacy display-name cabinets to slugs | `lib/cabinet.ts` | ✅ |
+
+**Library rebuilt.** `npm run library:build` fetches TheCocktailDB across three enumeration
+axes (a–z search, category/glass/ingredient filters) and merges the 20 hand-written classics:
+
+| | Before | After |
+|---|---|---|
+| Recipes | 1,050 | **629** |
+| …that are real drinks | 20 | **629** |
+| Distinct photographs | 41 | **629** |
+| Recipes with sourced lore | 20 (+1,030 fabricated) | **20** (and zero fabricated) |
+| Classics | self-declared | **79**, IBA-recognised or hand-written |
+| Unresolved ingredient names | n/a | 4 of 1,730 uses (Kool-Aid, Jello, Fruit, Maui) |
+
+**Bundle impact** (`next build`, First Load JS):
+
+| Route | Before | After | |
+|---|---|---|---|
+| `/` | 282 kB | **151 kB** | −46% |
+| `/drink/[id]` | 278 kB | **145 kB** | −48%, and now server-rendered |
+| `/profile` | 279 kB | **142 kB** | −49% |
 
 ### Milestone 2 — Matching engine · branch `feat/matching-engine`
 
 | # | Task | Files | Status |
 |---|------|-------|--------|
-| 2.1 | Rewrite matching over the taxonomy: hierarchy-aware, pantry-aware, substitutions (B2) | `lib/domain/matching.ts` | ⬜ |
-| 2.2 | Real Maximizer — rank candidate purchases by recipes unlocked | `lib/domain/matching.ts` | ⬜ |
-| 2.3 | Cabinet UI driven by the taxonomy, not by raw recipe strings (M10) | `pages/index.tsx` | ⬜ |
-| 2.4 | Flavour filters generated from the actual vocabulary (M8) | `pages/index.tsx` | ⬜ |
-| 2.5 | Unicode-fraction-safe measure parsing and conversion (M9) | `lib/domain/measures.ts` | ⬜ |
-| 2.6 | Vitest suite over taxonomy, matching, measures | `tests/` | ⬜ |
+| 2.1 | Rewrite matching over the taxonomy: hierarchy-aware, pantry-aware, substitutions (B2) | `lib/domain/matching.ts` | ✅ |
+| 2.2 | Real Maximizer — rank candidate purchases by recipes unlocked | `lib/domain/matching.ts` | ✅ |
+| 2.3 | Cabinet UI driven by the taxonomy, not by raw recipe strings (M10) | `pages/index.tsx` | ✅ |
+| 2.4 | Flavour filters generated from the actual vocabulary (M8) | `pages/index.tsx`, `/api/cocktails` | ✅ |
+| 2.5 | Unicode-fraction-safe measure parsing and conversion (M9) | `lib/domain/measures.ts` | ✅ |
+| 2.6 | Vitest suite over taxonomy, matching, measures, cabinet | `tests/` — **125 tests passing** | ✅ |
+
+**The headline fix.** Recipes a cabinet can actually make, before and after:
+
+| Cabinet | Before | After |
+|---|---|---|
+| Every ingredient the UI offers | 27 / 1,050 (2.6%) | **629 / 629 (100%)** |
+| Realistic 12-bottle home bar | 4 ready | **45 ready, 182 one bottle away** |
+| Gin + Campari + Sweet Vermouth | 1 | **6** — Negroni, Americano, Addison, Gin Sling, Gin Toddy, Lone Tree |
+
+Verified end-to-end against the running app: `/api/ingredients` (11 groups, counts from the
+live library), `/api/cabinet/match`, `/api/cocktails` search, `/api/cocktails/[id]`, plus the
+error paths (404 on an unknown recipe, 405 on the wrong verb, 400 on a malformed body).
+Drink pages now emit real OG/Twitter metadata and 307 from an id URL to the slug URL.
 
 ### Milestone 3 — Social, sharing & SEO · branch `feat/social-and-sharing`
 
@@ -181,6 +215,11 @@ whether to surface it. No user-facing crash from a data outage.
 | 3.3 | Lounge pagination + search | `pages/lounge.tsx`, `pages/api/lounge.ts` | ⬜ |
 | 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `pages/studio.tsx` | ⬜ |
 | 3.5 | Wishlist alongside favourites (G2) | migration, profile UI | ⬜ |
+
+Groundwork already in place for this milestone: the `custom_recipes → profiles` foreign key
+exists (so the Lounge byline query works), `favorites.kind` distinguishes library recipes
+from community ones, and `/drink/[id]` is already server-rendered — 3.1 is mostly a matter
+of repeating that treatment on `/custom-drink/[id]` and `/profile/[id]`.
 
 ### Milestone 4 — PWA, offline & polish · branch `feat/pwa-offline`
 
@@ -207,8 +246,65 @@ whether to surface it. No user-facing crash from a data outage.
 
 ---
 
-## 6. Progress log
+## 6. Where we left off
+
+**Stopped:** 2026-08-18, end of Milestone 2.
+**Branch:** `feat/real-recipe-data-layer` (stacked on `fix/build-and-foundation`, which is
+already committed). Milestone 1 + 2 work is **on disk and verified but not yet committed.**
+
+### State of the tree
+
+`npm run typecheck`, `npm run lint`, `npm test` (125 passing) and `npm run build` are all
+green. The app runs end-to-end with no Supabase configured, serving the bundled library.
+
+### Pick up here — in this order
+
+1. **Commit Milestone 1 + 2.** The working tree holds the whole data-layer and matching
+   rewrite. Suggested split: one commit for the domain + data layer + API routes, one for
+   the UI rewire. Nothing is half-finished; the last in-flight edit (below) is complete.
+
+2. **Finish the visual pass that was interrupted.** Driving the app with Playwright caught
+   a real bug and it has been **fixed but not yet re-verified in a browser**: the stocking
+   screen used to jump to results after the *first* ingredient click, because
+   `showStocking` was derived from `cabinet.length`. It is now an explicit `isStocking`
+   decision made once when the cabinet loads (`pages/index.tsx`). Re-run the screenshots to
+   confirm, and check the light theme while there.
+
+   The driver script is at `<scratchpad>/shots.mjs` and needs three things that cost time to
+   rediscover: Node 20+ (`~/.nvm/versions/node/v22.13.1/bin`), `playwright-core` pointed at
+   the cached headless binary
+   (`~/Library/Caches/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-mac-arm64/chrome-headless-shell`),
+   and `waitUntil: 'domcontentloaded'` — `networkidle` never settles because Next's dev
+   server holds an HMR websocket open.
+
+3. **Then Milestone 3** (social, sharing, SEO) as scoped below.
+
+### Known-good commands
+
+```bash
+npm run dev             # runs with or without Supabase configured
+npm run verify          # typecheck + lint + test + build
+npm run library:build   # refetch TheCocktailDB, rebuild data/cocktails.seed.json
+npm run db:seed         # push the seed to Supabase (needs SUPABASE_SERVICE_ROLE_KEY)
+```
+
+### Deferred, with reasons
+
+| Item | Why it was deferred |
+|---|---|
+| `next` 14 → 15 | The remaining production advisory is the image-optimizer `remotePatterns` DoS, which needs a major upgrade. Not currently exploitable here: pages use plain `<img>`, so the optimizer isn't in the request path. Worth doing before adding `next/image`. |
+| Remaining `npm audit` findings | All dev-only transitive (vitest/vite/esbuild dev server, eslint's `glob`, `postcss`). None ship to production. |
+| Self-hosted photography | Milestone 4.3. Photos are hotlinked from TheCocktailDB; fine for now, a reliability risk at scale. |
+| QR generated client-side | `components/QRShare.tsx` calls `api.qrserver.com`, which sends the recipe URL to a third party and breaks in offline mode. Worth replacing with a local generator during Milestone 4. |
+| Node 18 | `@supabase/supabase-js` warns on every build. The repo works, but Node 20+ is the supported floor and is already installed via nvm. |
+
+---
+
+## 7. Progress log
 
 | Date | Milestone | Note |
 |------|-----------|------|
-| 2026-08-17 | — | Full audit completed; B1–B4, M1–M10, G1–G6 recorded. Build decisions locked. |
+| 2026-08-17 | — | Full audit completed; B1–B6, M1–M10, G1–G6 recorded. Build decisions locked. |
+| 2026-08-17 | 0 | Foundation committed (`4dfcce2`): build repaired, schema consolidated and secured, Supabase made optional, theming tokens, next 14.2.35. |
+| 2026-08-18 | 1 | Real data layer: taxonomy, library rebuild (629 verified recipes), repository, API routes, 2 MB client bundle removed. Uncommitted. |
+| 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. Uncommitted. |
