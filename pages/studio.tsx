@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase/client';
 import { Plus, Trash2, ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/router';
 
