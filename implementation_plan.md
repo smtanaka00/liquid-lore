@@ -85,6 +85,7 @@ nowhere for it to plug in.
  ┌───────────────▼──────────────────────────────────────────┐
  │  Server boundary — pages/api/*                            │
  │  cocktails · cocktails/[id] · cabinet/match · ingredients  │
+ │  lounge                                                   │
  └───────────────┬──────────────────────────────────────────┘
                  │
  ┌───────────────▼──────────────────────────────────────────┐
@@ -211,8 +212,8 @@ Drink pages now emit real OG/Twitter metadata and 307 from an id URL to the slug
 | # | Task | Files | Status |
 |---|------|-------|--------|
 | 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/drink/[id].tsx`, … | ⬜ |
-| 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `pages/lounge.tsx` | ⬜ |
-| 3.3 | Lounge pagination + search | `pages/lounge.tsx`, `pages/api/lounge.ts` | ⬜ |
+| 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `lib/domain/community.ts`, `lib/data/community-source.ts` | ✅ |
+| 3.3 | Lounge pagination + search | `pages/api/lounge.ts`, `pages/lounge.tsx` | ✅ |
 | 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `pages/studio.tsx` | ⬜ |
 | 3.5 | Wishlist alongside favourites (G2) | migration, profile UI | ⬜ |
 
@@ -220,6 +221,24 @@ Groundwork already in place for this milestone: the `custom_recipes → profiles
 exists (so the Lounge byline query works), `favorites.kind` distinguishes library recipes
 from community ones, and `/drink/[id]` is already server-rendered — 3.1 is mostly a matter
 of repeating that treatment on `/custom-drink/[id]` and `/profile/[id]`.
+
+**3.2 + 3.3 — the community server boundary.** The Lounge no longer queries `custom_recipes`
+from the browser. `/api/lounge` owns the feed, which is what made pagination and search
+possible at all: the old effect pulled a flat `.limit(60)` with no total to page against.
+
+Community rows are the only ones in the app a *user* writes, so `normalizeCommunityRecipe`
+coerces every field — a hand-edited `ingredients` jsonb holding strings, nulls or numbers
+now renders a thin card instead of throwing inside the grid. The author name is resolved
+server-side through the `custom_recipes_creator_profile_fkey` embed and falls back to
+"a mixologist"; a raw `creator_id` can no longer reach the screen (G5).
+
+There is deliberately **no seed fallback** here, unlike the recipe library: community
+recipes exist only in the cloud, so "Supabase is unreachable" and "nobody has published
+yet" are different states and the feed says different things about them (`available: false`
+versus an empty list). Search terms are stripped of the characters that would restructure
+a PostgREST `or=(...)` filter before they are interpolated.
+
+14 new tests over the normalizer and the search sanitizer — **139 passing**.
 
 ### Milestone 4 — PWA, offline & polish · branch `feat/pwa-offline`
 
@@ -238,6 +257,8 @@ of repeating that treatment on `/custom-drink/[id]` and `/profile/[id]`.
 |------|--------------|----------|
 | `supabase-source` | unconfigured / network error / RLS denial | return `null`; repository falls through to seed and appends a note |
 | `seed-source` | seed file missing or corrupt | return empty list + note; API returns 200 with an empty payload, never 500 |
+| `community-source` | unconfigured / network error / RLS denial | return `available: false` with an empty feed — there is no local fallback for user content, so the UI says the Lounge is offline rather than implying nobody has posted |
+| `normalizeCommunityRecipe` | field of the wrong type in a user-written row | coerce to a safe value (`[]`, `null`, `0`); the recipe still renders, the row is never dropped |
 | `build-library.mjs` | TheCocktailDB 4xx/5xx or rate limit | retry with backoff; on final failure keep the previous seed and exit non-zero |
 | `normalizeIngredient` | unrecognised name | return an `unknown` slug tagged `unresolved` — never drop the ingredient silently |
 | `matchCabinet` | empty cabinet | return empty result sets, not an error |
@@ -307,4 +328,5 @@ npm run db:seed         # push the seed to Supabase (needs SUPABASE_SERVICE_ROLE
 | 2026-08-17 | — | Full audit completed; B1–B6, M1–M10, G1–G6 recorded. Build decisions locked. |
 | 2026-08-17 | 0 | Foundation committed (`4dfcce2`): build repaired, schema consolidated and secured, Supabase made optional, theming tokens, next 14.2.35. |
 | 2026-08-18 | 1 | Real data layer: taxonomy, library rebuild (629 verified recipes), repository, API routes, 2 MB client bundle removed. Uncommitted. |
-| 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. Uncommitted. |
+| 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. |
+| 2026-08-30 | 3 | Community server boundary: `/api/lounge` with pagination, search and the author join. The Lounge stopped querying Supabase directly. 139 tests. |
