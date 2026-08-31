@@ -211,7 +211,7 @@ Drink pages now emit real OG/Twitter metadata and 307 from an id URL to the slug
 
 | # | Task | Files | Status |
 |---|------|-------|--------|
-| 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/drink/[id].tsx`, … | ⬜ |
+| 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/custom-drink/[id].tsx`, `pages/profile/[id].tsx`, `pages/profile.tsx` | ✅ |
 | 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `lib/domain/community.ts`, `lib/data/community-source.ts` | ✅ |
 | 3.3 | Lounge pagination + search | `pages/api/lounge.ts`, `pages/lounge.tsx` | ✅ |
 | 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `pages/studio.tsx` | ⬜ |
@@ -239,6 +239,27 @@ versus an empty list). Search terms are stripped of the characters that would re
 a PostgREST `or=(...)` filter before they are interpolated.
 
 14 new tests over the normalizer and the search sanitizer — **139 passing**.
+
+**3.1 — every shareable URL now previews.** `/custom-drink/[id]` and `/profile/[id]` moved
+to `getServerSideProps` with real `<title>`, description, canonical and OG/Twitter tags,
+matching the treatment `/drink/[id]` already had. M2 is closed: there is no longer a
+shareable page that previews as a blank "Liquid Lore".
+
+Two decisions worth recording:
+
+- **A missing recipe or profile renders the in-app panel *and* sets a 404 status.** The
+  friendly page is for the person who followed a dead link; the status code is for the
+  crawler. `notFound: true` would have given the second and thrown away the first.
+- **`/profile/[id]` fetches only public columns.** `cabinet` lives on the same `profiles`
+  row and is not among them — it belongs to its owner and has no business in the HTML of
+  a public page. `UserProfile` still loads it client-side for the owner.
+- **Neither page is edge-cached.** Unlike library recipes, community content changes when
+  its author edits it, and a stale page reads as a failed save.
+
+`/custom-drink/[id]` First Load JS fell 138 kB → **90 kB**: with the fetch on the server it
+no longer pulls `@supabase/supabase-js` into the page bundle. `/profile` is now `noindex`.
+
+9 further tests (public-profile mapping, both metadata builders) — **148 passing**.
 
 ### Milestone 4 — PWA, offline & polish · branch `feat/pwa-offline`
 
@@ -330,3 +351,4 @@ npm run db:seed         # push the seed to Supabase (needs SUPABASE_SERVICE_ROLE
 | 2026-08-18 | 1 | Real data layer: taxonomy, library rebuild (629 verified recipes), repository, API routes, 2 MB client bundle removed. Uncommitted. |
 | 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. |
 | 2026-08-30 | 3 | Community server boundary: `/api/lounge` with pagination, search and the author join. The Lounge stopped querying Supabase directly. 139 tests. |
+| 2026-08-30 | 3 | Custom-drink and public-profile pages server-rendered with real OG/Twitter metadata; M2 closed. 148 tests. |

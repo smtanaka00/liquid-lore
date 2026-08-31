@@ -58,8 +58,24 @@ export interface CommunityFeed {
   available: boolean;
 }
 
+/**
+ * A profile as a stranger sees it.
+ *
+ * Deliberately narrow: the `profiles` row also carries `cabinet`, which belongs to its
+ * owner and must not travel in the HTML of a public page or a shared-link preview.
+ */
+export interface PublicProfile {
+  id: string;
+  username: string;
+  bio: string | null;
+  avatarUrl: string | null;
+}
+
 /** Shown when a recipe's profile row is missing or has no username. */
 export const ANONYMOUS_AUTHOR = 'a mixologist';
+
+/** Shown for a profile row that exists but has never been given a username. */
+export const ANONYMOUS_PROFILE = 'Mixologist';
 
 // ── coercion helpers ──────────────────────────────────────────────────────────
 
@@ -132,6 +148,57 @@ export function normalizeCommunityRecipe(row: Record<string, unknown>): Communit
     author: resolveAuthor(row.profiles),
     createdAt: asText(row.created_at),
   };
+}
+
+/**
+ * Map one `profiles` row onto `PublicProfile`.
+ *
+ * Returns: a profile whose `username` is always a printable label — never `null` and never
+ * the id, which is what the Lounge used to fall back to.
+ */
+export function normalizePublicProfile(row: Record<string, unknown>): PublicProfile {
+  return {
+    id: asText(row.id) ?? '',
+    username: asText(row.username) ?? ANONYMOUS_PROFILE,
+    bio: asText(row.bio),
+    avatarUrl: asText(row.avatar_url),
+  };
+}
+
+// ── metadata ──────────────────────────────────────────────────────────────────
+
+/** Long enough to be useful in a share card, short enough that no platform truncates it. */
+const MAX_DESCRIPTION = 200;
+
+/**
+ * The description a shared community recipe previews with.
+ *
+ * Prefers the author's own story. Failing that it describes the build from the actual
+ * ingredients — never an invented one, the same rule the curated library follows.
+ */
+export function communityMetaDescription(recipe: CommunityRecipe): string {
+  if (recipe.story) return recipe.story.slice(0, MAX_DESCRIPTION);
+
+  const names = recipe.ingredients.map(i => i.name).slice(0, 5).join(', ');
+  const glass = recipe.glass ? ` Served in a ${recipe.glass.toLowerCase()}.` : '';
+
+  if (!names) return `A community creation by ${recipe.author} on Liquid Lore.`;
+  return `${recipe.name}, a community creation by ${recipe.author}: ${names}.${glass}`.slice(0, MAX_DESCRIPTION);
+}
+
+/**
+ * The description a shared profile previews with.
+ *
+ * Args:
+ *     profile: the public profile.
+ *     recipeCount: how many recipes they have published.
+ */
+export function profileMetaDescription(profile: PublicProfile, recipeCount: number): string {
+  if (profile.bio) return profile.bio.slice(0, MAX_DESCRIPTION);
+
+  if (recipeCount === 0) return `${profile.username} on Liquid Lore.`;
+  const plural = recipeCount === 1 ? 'signature recipe' : 'signature recipes';
+  return `${profile.username} has published ${recipeCount} ${plural} on Liquid Lore.`;
 }
 
 // ── search ────────────────────────────────────────────────────────────────────

@@ -1,7 +1,8 @@
 /**
  * lib/data/community-source.ts
  *
- * Reads user-published recipes out of Supabase.
+ * Reads user-published content — recipes and the public profiles that author them —
+ * out of Supabase.
  *
  * SERVER ONLY. Called from `pages/api/lounge.ts` and `getServerSideProps`.
  *
@@ -15,7 +16,13 @@
  */
 
 import { getServerClient } from '../supabase/server';
-import { normalizeCommunityRecipe, type CommunityFeed, type CommunityRecipe } from '../domain/community';
+import {
+  normalizeCommunityRecipe,
+  normalizePublicProfile,
+  type CommunityFeed,
+  type CommunityRecipe,
+  type PublicProfile,
+} from '../domain/community';
 
 /**
  * Explicit column list, plus the author's username through the
@@ -123,6 +130,35 @@ export async function fetchCommunityRecipe(id: string): Promise<CommunityRecipe 
     return normalizeCommunityRecipe(data as Record<string, unknown>);
   } catch {
     // An id that isn't a uuid makes Postgres raise rather than return no rows.
+    return null;
+  }
+}
+
+/**
+ * One public profile by user id.
+ *
+ * Only the columns a stranger may see. `cabinet` is deliberately not among them: the
+ * profile page loads it client-side for the owner, and it has no business in the HTML of
+ * someone else's page or in a shared link preview.
+ *
+ * Returns: the profile, or `null` when it does not exist or Supabase is unreachable.
+ */
+export async function fetchPublicProfile(id: string): Promise<PublicProfile | null> {
+  if (!id) return null;
+
+  const client = getServerClient();
+  if (!client) return null;
+
+  try {
+    const { data, error } = await client
+      .from('profiles')
+      .select('id, username, bio, avatar_url')
+      .eq('id', id)
+      .maybeSingle();
+
+    if (error || !data) return null;
+    return normalizePublicProfile(data as Record<string, unknown>);
+  } catch {
     return null;
   }
 }

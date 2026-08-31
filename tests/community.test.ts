@@ -10,9 +10,13 @@
 import { describe, it, expect } from 'vitest';
 import {
   normalizeCommunityRecipe,
+  normalizePublicProfile,
   resolveAuthor,
   sanitizeSearchTerm,
+  communityMetaDescription,
+  profileMetaDescription,
   ANONYMOUS_AUTHOR,
+  ANONYMOUS_PROFILE,
 } from '../lib/domain/community';
 
 const CREATOR = '7f3c1a20-0000-4000-8000-000000000001';
@@ -113,6 +117,76 @@ describe('resolveAuthor', () => {
     expect(resolveAuthor({ username: null })).toBe(ANONYMOUS_AUTHOR);
     expect(resolveAuthor({ username: '  ' })).toBe(ANONYMOUS_AUTHOR);
     expect(resolveAuthor(CREATOR)).toBe(ANONYMOUS_AUTHOR);
+  });
+});
+
+describe('normalizePublicProfile', () => {
+  it('maps the public columns and nothing else', () => {
+    const profile = normalizePublicProfile({
+      id: CREATOR,
+      username: 'nightjar',
+      bio: 'Mostly agave.',
+      avatar_url: 'https://example.test/a.jpg',
+      cabinet: ['gin', 'campari'],
+    });
+
+    expect(profile).toEqual({
+      id: CREATOR,
+      username: 'nightjar',
+      bio: 'Mostly agave.',
+      avatarUrl: 'https://example.test/a.jpg',
+    });
+    // The cabinet is its owner's business and must not travel to a public page.
+    expect(profile).not.toHaveProperty('cabinet');
+  });
+
+  it('gives a profile with no username a printable label', () => {
+    expect(normalizePublicProfile({ id: CREATOR }).username).toBe(ANONYMOUS_PROFILE);
+    expect(normalizePublicProfile({ id: CREATOR, username: '  ' }).username).toBe(ANONYMOUS_PROFILE);
+  });
+});
+
+describe('communityMetaDescription', () => {
+  it('prefers the author’s own story', () => {
+    const recipe = normalizeCommunityRecipe(validRow());
+    expect(communityMetaDescription(recipe)).toBe('Built for the last hour of a long night.');
+  });
+
+  it('describes the actual build when there is no story, rather than inventing one', () => {
+    const recipe = normalizeCommunityRecipe(validRow({ story: null }));
+    const description = communityMetaDescription(recipe);
+
+    expect(description).toContain('Mezcal');
+    expect(description).toContain('nightjar');
+    expect(description).toContain('coupe glass');
+  });
+
+  it('still produces a shareable line for a recipe with nothing in it', () => {
+    const recipe = normalizeCommunityRecipe({ id: 'x', name: 'Ghost' });
+    expect(communityMetaDescription(recipe)).toBe(`A community creation by ${ANONYMOUS_AUTHOR} on Liquid Lore.`);
+  });
+
+  it('stays inside the length a share card will show', () => {
+    const recipe = normalizeCommunityRecipe(validRow({ story: 'x'.repeat(600) }));
+    expect(communityMetaDescription(recipe)).toHaveLength(200);
+  });
+});
+
+describe('profileMetaDescription', () => {
+  const profile = normalizePublicProfile({ id: CREATOR, username: 'nightjar' });
+
+  it('prefers the bio', () => {
+    const withBio = normalizePublicProfile({ id: CREATOR, username: 'nightjar', bio: 'Mostly agave.' });
+    expect(profileMetaDescription(withBio, 4)).toBe('Mostly agave.');
+  });
+
+  it('counts published recipes when there is no bio, and gets the plural right', () => {
+    expect(profileMetaDescription(profile, 1)).toContain('1 signature recipe');
+    expect(profileMetaDescription(profile, 4)).toContain('4 signature recipes');
+  });
+
+  it('says nothing about counts for a profile that has published nothing', () => {
+    expect(profileMetaDescription(profile, 0)).toBe('nightjar on Liquid Lore.');
   });
 });
 
