@@ -38,6 +38,8 @@ export interface CommunityRecipe {
   instructions: string[];
   glass: string | null;
   garnish: string | null;
+  /** Tags from the same vocabulary the curated library uses, so one filter finds both. */
+  flavorProfiles: string[];
   imageUrl: string | null;
   likesCount: number;
   authorId: string | null;
@@ -142,6 +144,7 @@ export function normalizeCommunityRecipe(row: Record<string, unknown>): Communit
     instructions: asStringArray(row.instructions),
     glass: asText(row.glass),
     garnish: asText(row.garnish),
+    flavorProfiles: asStringArray(row.flavor_profiles),
     imageUrl: asText(row.image_url),
     likesCount: Number.isFinite(row.likes_count) ? Math.max(0, Number(row.likes_count)) : 0,
     authorId: asText(row.creator_id),

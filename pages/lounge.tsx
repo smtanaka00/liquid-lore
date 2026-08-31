@@ -182,7 +182,9 @@ export default function Lounge() {
                 <p className="text-muted-foreground uppercase tracking-[0.3em] text-[10px] font-bold max-w-xl">Community Creations from around the world</p>
             </header>
 
-            <div className="max-w-2xl mx-auto mb-14">
+            {/* Hidden when the feed is unavailable — a search box that cannot search is
+                worse than no search box. */}
+            <div className={`max-w-2xl mx-auto mb-14 ${available ? '' : 'hidden'}`}>
                 <div className="relative">
                     <Search size={18} className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
                     <input

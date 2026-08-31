@@ -214,7 +214,7 @@ Drink pages now emit real OG/Twitter metadata and 307 from an id URL to the slug
 | 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/custom-drink/[id].tsx`, `pages/profile/[id].tsx`, `pages/profile.tsx` | ✅ |
 | 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `lib/domain/community.ts`, `lib/data/community-source.ts` | ✅ |
 | 3.3 | Lounge pagination + search | `pages/api/lounge.ts`, `pages/lounge.tsx` | ✅ |
-| 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `pages/studio.tsx` | ⬜ |
+| 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `lib/domain/recipe-draft.ts`, `pages/studio.tsx`, `0006_studio.sql` | ✅ |
 | 3.5 | Wishlist alongside favourites (G2) | migration, profile UI | ⬜ |
 
 Groundwork already in place for this milestone: the `custom_recipes → profiles` foreign key
@@ -260,6 +260,31 @@ Two decisions worth recording:
 no longer pulls `@supabase/supabase-js` into the page bundle. `/profile` is now `noindex`.
 
 9 further tests (public-profile mapping, both metadata builders) — **148 passing**.
+
+**3.4 — the Creator Studio, rebuilt.** G3 claimed a multi-step form with validation, image
+upload and flavour tagging; what existed was one long form whose only validation was the
+browser's `required` attribute, so a drink could reach the Lounge as a name plus one blank
+instruction.
+
+The rules live in `lib/domain/recipe-draft.ts`, not in the component — the wizard needs to
+ask "is *this* step complete?" to gate the Continue button, and the same rules must hold at
+publish time whichever step the user is standing on. `toInsertRow` is the single place a
+draft becomes a row, so trimming and blank-dropping cannot drift from what validation
+judged. Abandoned rows (a "+" click the user thought better of) are ignored rather than
+flagged; a listed ingredient with no measure is not.
+
+Flavour tags come from `/api/cocktails`' live vocabulary rather than a hardcoded list —
+the same fix M8 applied to the browse filters, for the same reason: the old chip list had
+drifted to offering "Strong", which matched nothing.
+
+Photography goes to a `recipe-images` bucket keyed by `<user-id>/<file>`, with policies on
+that first path segment so one creator cannot overwrite another's image — the storage-layer
+version of the `custom_recipes` UPDATE hole 0004 closed. 5 MB and a MIME allow-list are
+enforced by Storage itself, and an upload failure is reported without blocking publish.
+
+23 new tests over the draft rules — **171 passing**. The wizard was driven end-to-end in a
+browser: step gating, the blocked-Continue messages, the live tag vocabulary (15 real tags)
+and the publish gate all verified.
 
 ### Milestone 4 — PWA, offline & polish · branch `feat/pwa-offline`
 
@@ -352,3 +377,4 @@ npm run db:seed         # push the seed to Supabase (needs SUPABASE_SERVICE_ROLE
 | 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. |
 | 2026-08-30 | 3 | Community server boundary: `/api/lounge` with pagination, search and the author join. The Lounge stopped querying Supabase directly. 139 tests. |
 | 2026-08-30 | 3 | Custom-drink and public-profile pages server-rendered with real OG/Twitter metadata; M2 closed. 148 tests. |
+| 2026-08-30 | 3 | Creator Studio rebuilt as a validated four-step wizard with library flavour tags and owner-scoped image upload; G3 closed. 171 tests. |

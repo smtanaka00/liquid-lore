@@ -151,6 +151,13 @@ export default function CustomDrinkDetail({ drink, canonicalUrl }: CustomDrinkPa
                                     <Sparkles size={12} /> {drink.garnish}
                                 </span>
                             )}
+                            {/* Same vocabulary the curated library uses, so these read as
+                                the tags they are rather than free-text the author invented. */}
+                            {drink.flavorProfiles.map(tag => (
+                                <span key={tag} className="bg-muted text-muted-foreground px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border border-border">
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
                         <h1 className="text-6xl md:text-7xl font-serif text-primary pr-4 leading-tight">{drink.name}</h1>
 

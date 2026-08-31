@@ -31,7 +31,7 @@ import {
  */
 const COLUMNS = `
   id, creator_id, name, story, ingredients, instructions, glass, garnish,
-  image_url, likes_count, created_at,
+  flavor_profiles, image_url, likes_count, created_at,
   profiles!custom_recipes_creator_profile_fkey (username)
 `;
 

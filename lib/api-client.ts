@@ -82,6 +82,19 @@ export async function fetchCocktails(options: CocktailQuery = {}): Promise<Cockt
   return getJson(`/api/cocktails?${params}`, EMPTY_LIST, { signal: options.signal });
 }
 
+/**
+ * The flavour tags the library actually uses, most common first.
+ *
+ * Served by `/api/cocktails`, which computes the vocabulary from the live library on every
+ * request — so this asks for a single recipe and keeps only the `flavors`. The Studio uses
+ * it to offer tags that exist, the same fix M8 applied to the browse filters: the old
+ * hardcoded chip list contained "Strong", which matched nothing in the data.
+ */
+export async function fetchFlavorVocabulary(): Promise<Array<{ tag: string; count: number }>> {
+  const result = await fetchCocktails({ limit: 1 });
+  return result.flavors;
+}
+
 /** Returns `null` when the recipe doesn't exist or the request failed. */
 export async function fetchCocktail(idOrSlug: string): Promise<Cocktail | null> {
   const result = await getJson<{ cocktail: Cocktail } | null>(
