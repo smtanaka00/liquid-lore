@@ -85,6 +85,7 @@ nowhere for it to plug in.
  ┌───────────────▼──────────────────────────────────────────┐
  │  Server boundary — pages/api/*                            │
  │  cocktails · cocktails/[id] · cabinet/match · ingredients  │
+ │  lounge                                                   │
  └───────────────┬──────────────────────────────────────────┘
                  │
  ┌───────────────▼──────────────────────────────────────────┐
@@ -210,16 +211,80 @@ Drink pages now emit real OG/Twitter metadata and 307 from an id URL to the slug
 
 | # | Task | Files | Status |
 |---|------|-------|--------|
-| 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/drink/[id].tsx`, … | ⬜ |
-| 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `pages/lounge.tsx` | ⬜ |
-| 3.3 | Lounge pagination + search | `pages/lounge.tsx`, `pages/api/lounge.ts` | ⬜ |
-| 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `pages/studio.tsx` | ⬜ |
+| 3.1 | Server-render drink/profile/custom-drink pages with per-page OG + Twitter metadata (M2) | `pages/custom-drink/[id].tsx`, `pages/profile/[id].tsx`, `pages/profile.tsx` | ✅ |
+| 3.2 | Join `profiles.username` into the Lounge feed; drop raw UUIDs (G5) | `lib/domain/community.ts`, `lib/data/community-source.ts` | ✅ |
+| 3.3 | Lounge pagination + search | `pages/api/lounge.ts`, `pages/lounge.tsx` | ✅ |
+| 3.4 | Creator Studio: multi-step flow, validation, flavour tagging, image upload (G3) | `lib/domain/recipe-draft.ts`, `pages/studio.tsx`, `0006_studio.sql` | ✅ |
 | 3.5 | Wishlist alongside favourites (G2) | migration, profile UI | ⬜ |
 
 Groundwork already in place for this milestone: the `custom_recipes → profiles` foreign key
 exists (so the Lounge byline query works), `favorites.kind` distinguishes library recipes
 from community ones, and `/drink/[id]` is already server-rendered — 3.1 is mostly a matter
 of repeating that treatment on `/custom-drink/[id]` and `/profile/[id]`.
+
+**3.2 + 3.3 — the community server boundary.** The Lounge no longer queries `custom_recipes`
+from the browser. `/api/lounge` owns the feed, which is what made pagination and search
+possible at all: the old effect pulled a flat `.limit(60)` with no total to page against.
+
+Community rows are the only ones in the app a *user* writes, so `normalizeCommunityRecipe`
+coerces every field — a hand-edited `ingredients` jsonb holding strings, nulls or numbers
+now renders a thin card instead of throwing inside the grid. The author name is resolved
+server-side through the `custom_recipes_creator_profile_fkey` embed and falls back to
+"a mixologist"; a raw `creator_id` can no longer reach the screen (G5).
+
+There is deliberately **no seed fallback** here, unlike the recipe library: community
+recipes exist only in the cloud, so "Supabase is unreachable" and "nobody has published
+yet" are different states and the feed says different things about them (`available: false`
+versus an empty list). Search terms are stripped of the characters that would restructure
+a PostgREST `or=(...)` filter before they are interpolated.
+
+14 new tests over the normalizer and the search sanitizer — **139 passing**.
+
+**3.1 — every shareable URL now previews.** `/custom-drink/[id]` and `/profile/[id]` moved
+to `getServerSideProps` with real `<title>`, description, canonical and OG/Twitter tags,
+matching the treatment `/drink/[id]` already had. M2 is closed: there is no longer a
+shareable page that previews as a blank "Liquid Lore".
+
+Two decisions worth recording:
+
+- **A missing recipe or profile renders the in-app panel *and* sets a 404 status.** The
+  friendly page is for the person who followed a dead link; the status code is for the
+  crawler. `notFound: true` would have given the second and thrown away the first.
+- **`/profile/[id]` fetches only public columns.** `cabinet` lives on the same `profiles`
+  row and is not among them — it belongs to its owner and has no business in the HTML of
+  a public page. `UserProfile` still loads it client-side for the owner.
+- **Neither page is edge-cached.** Unlike library recipes, community content changes when
+  its author edits it, and a stale page reads as a failed save.
+
+`/custom-drink/[id]` First Load JS fell 138 kB → **90 kB**: with the fetch on the server it
+no longer pulls `@supabase/supabase-js` into the page bundle. `/profile` is now `noindex`.
+
+9 further tests (public-profile mapping, both metadata builders) — **148 passing**.
+
+**3.4 — the Creator Studio, rebuilt.** G3 claimed a multi-step form with validation, image
+upload and flavour tagging; what existed was one long form whose only validation was the
+browser's `required` attribute, so a drink could reach the Lounge as a name plus one blank
+instruction.
+
+The rules live in `lib/domain/recipe-draft.ts`, not in the component — the wizard needs to
+ask "is *this* step complete?" to gate the Continue button, and the same rules must hold at
+publish time whichever step the user is standing on. `toInsertRow` is the single place a
+draft becomes a row, so trimming and blank-dropping cannot drift from what validation
+judged. Abandoned rows (a "+" click the user thought better of) are ignored rather than
+flagged; a listed ingredient with no measure is not.
+
+Flavour tags come from `/api/cocktails`' live vocabulary rather than a hardcoded list —
+the same fix M8 applied to the browse filters, for the same reason: the old chip list had
+drifted to offering "Strong", which matched nothing.
+
+Photography goes to a `recipe-images` bucket keyed by `<user-id>/<file>`, with policies on
+that first path segment so one creator cannot overwrite another's image — the storage-layer
+version of the `custom_recipes` UPDATE hole 0004 closed. 5 MB and a MIME allow-list are
+enforced by Storage itself, and an upload failure is reported without blocking publish.
+
+23 new tests over the draft rules — **171 passing**. The wizard was driven end-to-end in a
+browser: step gating, the blocked-Continue messages, the live tag vocabulary (15 real tags)
+and the publish gate all verified.
 
 ### Milestone 4 — PWA, offline & polish · branch `feat/pwa-offline`
 
@@ -238,6 +303,8 @@ of repeating that treatment on `/custom-drink/[id]` and `/profile/[id]`.
 |------|--------------|----------|
 | `supabase-source` | unconfigured / network error / RLS denial | return `null`; repository falls through to seed and appends a note |
 | `seed-source` | seed file missing or corrupt | return empty list + note; API returns 200 with an empty payload, never 500 |
+| `community-source` | unconfigured / network error / RLS denial | return `available: false` with an empty feed — there is no local fallback for user content, so the UI says the Lounge is offline rather than implying nobody has posted |
+| `normalizeCommunityRecipe` | field of the wrong type in a user-written row | coerce to a safe value (`[]`, `null`, `0`); the recipe still renders, the row is never dropped |
 | `build-library.mjs` | TheCocktailDB 4xx/5xx or rate limit | retry with backoff; on final failure keep the previous seed and exit non-zero |
 | `normalizeIngredient` | unrecognised name | return an `unknown` slug tagged `unresolved` — never drop the ingredient silently |
 | `matchCabinet` | empty cabinet | return empty result sets, not an error |
@@ -307,4 +374,7 @@ npm run db:seed         # push the seed to Supabase (needs SUPABASE_SERVICE_ROLE
 | 2026-08-17 | — | Full audit completed; B1–B6, M1–M10, G1–G6 recorded. Build decisions locked. |
 | 2026-08-17 | 0 | Foundation committed (`4dfcce2`): build repaired, schema consolidated and secured, Supabase made optional, theming tokens, next 14.2.35. |
 | 2026-08-18 | 1 | Real data layer: taxonomy, library rebuild (629 verified recipes), repository, API routes, 2 MB client bundle removed. Uncommitted. |
-| 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. Uncommitted. |
+| 2026-08-18 | 2 | Matching engine rewritten — fully-stocked coverage 2.6% → 100%. 125 tests. |
+| 2026-08-30 | 3 | Community server boundary: `/api/lounge` with pagination, search and the author join. The Lounge stopped querying Supabase directly. 139 tests. |
+| 2026-08-30 | 3 | Custom-drink and public-profile pages server-rendered with real OG/Twitter metadata; M2 closed. 148 tests. |
+| 2026-08-30 | 3 | Creator Studio rebuilt as a validated four-step wizard with library flavour tags and owner-scoped image upload; G3 closed. 171 tests. |

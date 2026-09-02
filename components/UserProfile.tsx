@@ -7,6 +7,11 @@
  *
  * Guests have no row in `profiles`, so their cabinet is read from localStorage and the
  * page renders in a clearly-labelled local-only mode rather than erroring.
+ *
+ * `initialProfile` is the server-fetched public profile, passed in by `/profile/[id]`.
+ * It seeds the header so the mixologist's name is in the server HTML — the page is
+ * linked from every Lounge card, and rendering "Loading Profile…" to a crawler wasted
+ * the metadata work. It is only ever the public columns; the cabinet still loads here.
  */
 
 import { useState, useEffect } from 'react';
@@ -15,13 +20,21 @@ import { ArrowLeft, User, Heart, PenTool, Sparkles, ShieldCheck, Trophy, Medal, 
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { fetchCocktail } from '../lib/api-client';
+import type { PublicProfile } from '../lib/domain/community';
 
-export const UserProfile = ({ profileId }: { profileId?: string }) => {
+interface UserProfileProps {
+    profileId?: string;
+    initialProfile?: PublicProfile | null;
+}
+
+export const UserProfile = ({ profileId, initialProfile }: UserProfileProps) => {
     const router = useRouter();
-    const [userProfile, setUserProfile] = useState<any>(null);
+    const [userProfile, setUserProfile] = useState<any>(initialProfile ?? null);
     const [favorites, setFavorites] = useState<any[]>([]);
     const [myRecipes, setMyRecipes] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    // With a server-rendered profile there is nothing to wait for before painting the
+    // header; the sections below fill in as their queries land.
+    const [loading, setLoading] = useState(!initialProfile);
     const [isOwnProfile, setIsOwnProfile] = useState(false);
 
     useEffect(() => {
@@ -44,8 +57,11 @@ export const UserProfile = ({ profileId }: { profileId?: string }) => {
 
             setIsOwnProfile(session?.user?.id === targetId);
 
+            // `select('*')` adds the cabinet, which the server-rendered profile omits on
+            // purpose. Keep whatever the server already gave us if this query comes back
+            // empty — a user can exist before their profile row does.
             const { data: profile } = await supabase.from('profiles').select('*').eq('id', targetId).single();
-            setUserProfile(profile || { id: targetId }); // a user can exist before their profile row does
+            setUserProfile((current: any) => profile ?? current ?? { id: targetId });
 
             loadProfileData(targetId);
         };

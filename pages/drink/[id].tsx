@@ -22,6 +22,7 @@ import { useTheme } from 'next-themes';
 import { QRShare } from '../../components/QRShare';
 import { GlassIcon } from '../../components/GlassIcon';
 import { supabase, isSupabaseConfigured } from '../../lib/supabase/client';
+import { saveToList, removeFromCollections, type CollectionList } from '../../lib/collections';
 import { getCocktail } from '../../lib/data/repository';
 import { convertMeasure, hasConvertibleMeasures, type MeasureUnit } from '../../lib/domain/measures';
 import type { Cocktail } from '../../lib/domain/types';
@@ -67,7 +68,9 @@ export default function DrinkDetail({ drink, canonicalUrl }: DrinkPageProps) {
   const [unit, setUnit] = useState<MeasureUnit>('oz');
 
   const [session, setSession] = useState<any>(null);
-  const [isFavorite, setIsFavorite] = useState(false);
+  /** Which list this drink is on, or null for neither. One value, because a drink has one
+   *  status — `unique (user_id, drink_id)` enforces the same thing in the database. */
+  const [savedTo, setSavedTo] = useState<CollectionList | null>(null);
   const [notes, setNotes] = useState<any[]>([]);
   const [isQROpen, setIsQROpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -92,8 +95,8 @@ export default function DrinkDetail({ drink, canonicalUrl }: DrinkPageProps) {
       if (!session) return;
 
       supabase.from('favorites')
-        .select('id').eq('user_id', session.user.id).eq('drink_id', drink.id).maybeSingle()
-        .then(({ data }) => setIsFavorite(Boolean(data)));
+        .select('list').eq('user_id', session.user.id).eq('drink_id', drink.id).maybeSingle()
+        .then(({ data }) => setSavedTo(data ? (data.list === 'wishlist' ? 'wishlist' : 'favorite') : null));
 
       supabase.from('tasting_notes')
         .select('*').eq('user_id', session.user.id).eq('drink_id', drink.id)
